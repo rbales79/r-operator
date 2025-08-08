@@ -1,0 +1,19 @@
+apiVersion: pipelines.example.com/v1
+kind: ArgoPipeline
+metadata:
+  name: hello-pipeline
+  namespace: default
+spec:
+  pipelineYaml: |
+    apiVersion: argoproj.io/v1alpha1
+    kind: Workflow
+    metadata:
+      name: hello-world
+    spec:
+      entrypoint: whalesay
+      templates:
+        - name: whalesay
+          container:
+            image: docker/whalesay
+            command: [cowsay]
+            args: ["hello world"]
